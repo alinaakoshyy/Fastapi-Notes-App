@@ -9,11 +9,15 @@ app = FastAPI()
 
 
 class NoteIn(BaseModel):
+    priority: str
+    title: str
     content: str
 
 
 class Fullnote(BaseModel):
     note_id: int
+    priority: str
+    title: str
     content: str
     created_at: datetime
 
@@ -27,6 +31,8 @@ def add_note(note: NoteIn):  # NoteIn is a Pydantic model for input validation
     global next_note_id
     new_note = Fullnote(
         note_id=next_note_id,
+        priority=note.priority,
+        title=note.title,
         content=note.content,
         created_at=datetime.now()
     )
@@ -37,12 +43,23 @@ def add_note(note: NoteIn):  # NoteIn is a Pydantic model for input validation
 
 @app.get("/get_notes")
 def get_notes(search: Optional[str] = None):
-    if search:    # If a search query is provided, filter the notes
-        # case-insensitive search
+    if search:    # If a search query is provided, filter the notes 
+        search_lower = search.lower()  # Convert search term to lowercase for case-insensitive comparison     
         filtered_notes = [
-            note for note in notes if search.lower() in note.content.lower()]
+            note for note in notes 
+            if search_lower in note.title.lower() or search_lower in note.content.lower()] # case-insensitive search
         return {"notes": filtered_notes}
     return {"notes": notes}    # If no search query, return all notes
+
+
+@app.put("/update_note/{note_id}")
+def update_note(note_id: int, updated_note: NoteIn):
+    for note in notes:
+        if note.note_id == note_id:
+            note.title = updated_note.title
+            note.content = updated_note.content
+            return {"message": f"Note with ID {note_id} updated successfully"}
+    return {"error": "Note not found"}
 
 
 @app.delete("/delete_note/{note_id}")

@@ -1,35 +1,35 @@
 # 📝 FastAPI Notes App
 
-A simple and clean RESTful API built using **FastAPI**.  
-This project allows users to **create**, **view**, **search**, and **delete notes** using API endpoints.
+A simple and lightweight Notes API built using **FastAPI**.  
+This project allows you to create, read, update, delete, and search notes — fully functional and tested using Postman.
 
 ---
 
 ## 🚀 Features
 
 - ✅ Add new notes
-- ✅ View all notes
-- ✅ Search notes by keyword (query param)
-- ✅ Delete notes by ID
-- ✅ Automatically assigns ID & timestamp to each note
+- 🔍 Get all notes or search by keyword
+- 📄 Get a single note by its ID
+- ✏️ Update a note by ID
+- ❌ Delete a note by ID
+- 🧪 Fully tested with Swagger UI and Postman
 
 ---
 
-## 📦 Tech Stack
+## 📦 Technologies Used
 
-- **Python 3**
-- **FastAPI**
-- **Pydantic**
-- **Uvicorn** (for running the server)
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [Pydantic](https://docs.pydantic.dev/)
+- Python 3.11+
 
 ---
 
 ## ▶️ How to Run
 
 1. Clone the repo:
-   ```bash
-   git clone https://github.com/alinaakoshyy/Fastapi-Notes-App.git
-   cd Fastapi-Notes-App
+```bash
+git clone https://github.com/alinaakoshyy/Fastapi-Notes-App.git
+cd Fastapi-Notes-App
 
 
 2. Create a virtual environment (optional but recommended):
@@ -51,11 +51,10 @@ Copy
 Edit
 uvicorn fastapi2:app --reload
 
-5. Visit Swagger UI at:
-arduino
-Copy
-Edit
-http://127.0.0.1:8000/docs
+5. Open your browser:
+Swagger UI: http://127.0.0.1:8000/docs
+
+Redoc: http://127.0.0.1:8000/redoc
 
 💡 Example Endpoints
 Method	Endpoint	Description
@@ -64,5 +63,17 @@ GET	/get_notes	View all notes
 GET	/get_notes?search=milk	Search notes
 DELETE	/delete_note/{id}	Delete a note by ID
 
+🧪 Postman Tips
+Body type for POST/PUT: raw → JSON
+
+Example:
+
+json
+Copy
+Edit
+{
+  "title": "Dev's Birthday",
+  "content": "10th August"
+}
 
 💚 Made with FastAPI & love by alina

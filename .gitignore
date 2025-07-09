@@ -1,0 +1,5 @@
+# Ignore these files
+demo1.py
+demo2.py
+fastapi1.py
+mongodb1.py

@@ -13,6 +13,10 @@ import os
 
 app = FastAPI()
 
+@app.get("/")
+def home():
+    return {"message": "Welcome to the FastAPI Notes App 💚"}
+# Pydantic models for request and response validation
 
 class NoteIn(BaseModel):
     priority: Optional[str] = "moderate"  # Default priority is "moderate"
